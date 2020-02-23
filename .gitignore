@@ -1,3 +1,6 @@
 .idea/
 AutoQAProject.iml
 /target/
+*.exe
+logs/
+screenshots/
