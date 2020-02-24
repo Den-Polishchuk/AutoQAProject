@@ -46,9 +46,22 @@ public class ForPO extends BaseTest {
 
     @Test
     public void eveningCourses(){
+        String coursesExpected[] = {"Тестування", "Frontend development", "JS development", "Веб-дизайн", "PHP", "Java programming", "Python", "Data Science/Machine Learning", "C# /.NET development", "C++", "Game Development", "DEVOPS", "Digital Marketing", "Управління персоналом", "Управління проектами", "Mobile development", "Відеомонтаж", "Cisco", "Go development", "Кібербезпека", "Менеджмент"};
         homePage.open()
                 .openEveningCourses()
                 .openCoursesEven();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='container_12 isotope 21']"))));
+        List<WebElement> coursesList = driver.findElements(By.xpath("(//div[@class='container_12 isotope 21'])[1]//h2"));
+        List<String> coursesActual = new ArrayList<>();
+
+        for(WebElement el: coursesList){
+            coursesActual.add(el.getText());
+        }
+
+        for(String course: coursesExpected){
+            boolean isContains = coursesActual.contains(course);
+            assertTrue(isContains, String.format("Expected course '%s' to be present on page", course));
+        }
     }
 
 
@@ -70,7 +83,8 @@ public class ForPO extends BaseTest {
         for(String lang: langExpected){
             boolean isContains = langActual.contains(lang);
             assertTrue(isContains, String.format("Expected language '%s' to be present on page", lang));
-
         }
     }
+
+
 }

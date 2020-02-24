@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
-public class BaseTest {
+public abstract class BaseTest {
     WebDriver driver;
     WebDriverWait wait;
 
