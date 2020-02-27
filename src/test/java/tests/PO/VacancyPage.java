@@ -21,7 +21,7 @@ public class VacancyPage extends BasePage {
     }
 
     public VacancyPage selectVacancy(String vacancy){
-        logger.trace("Select vacancy" + vacancy);
+        logger.trace("Select vacancy"+" " + vacancy);
         logger.debug("Select vacancy" + vacancy);
         logger.info("Select vacancy" + vacancy);
         logger.error("Select vacancy" + vacancy);

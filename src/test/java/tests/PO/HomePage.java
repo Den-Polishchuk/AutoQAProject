@@ -16,8 +16,9 @@ public class HomePage extends BasePage {
     }
 
     public HomePage open(){
-        logger.info("Home page is opened");
-        logger.debug("Home page is opened dfwefwefwef egdsfadsfr gqefqdcq dcqertgqdc qdc");
+        logger.debug("Home page is opened ("+ driver.getCurrentUrl() +") and ready to be tested");
+        logger.info("Home page was opened");
+        logger.error("Home page wasn't opened");
         driver.get("http://iteaua-develop.demo.gns-it.com/uk/");
         WebElement spinner = driver.findElement(By.id("preload-it"));
         wait.until(ExpectedConditions.visibilityOf(spinner));
@@ -34,6 +35,9 @@ public class HomePage extends BasePage {
     }
 
     public HomePage openAbout(){
+        logger.info("About page is opened");
+        logger.error("About page wasn't opened");
+        logger.debug("About page is opened and ready to be tested");
         WebElement aboutBtn = driver.findElement(By.xpath("//a[(contains(@href, 'about_itea')) and @class='parent']"));
         wait.until(ExpectedConditions.visibilityOf(aboutBtn));
         aboutBtn.click();
@@ -41,6 +45,9 @@ public class HomePage extends BasePage {
     }
 
     public HomePage openVacancies(){
+        logger.info("Vacancy page is opened");
+        logger.error("Vacancy page wasn't opened");
+        logger.debug("Vacancy page is opened and ready to be tested");
         WebElement vacancies = driver.findElement(By.xpath("//li[@id='menu-item-15362']/a"));
         wait.until(ExpectedConditions.elementToBeClickable(vacancies));
         vacancies.click();
