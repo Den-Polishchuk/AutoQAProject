@@ -2,7 +2,7 @@
 <suite name="A">
     <test name="B">
         <classes>
-            <class name="test.java.tests.PO.Unit"/>
+            <class name="test.java.tests.Unit"/>
         </classes>
     </test>
 </suite>
