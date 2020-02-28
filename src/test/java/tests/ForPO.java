@@ -5,24 +5,27 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import test.java.tests.PO.EveningCoursesPage;
 import test.java.tests.PO.HomePage;
 import test.java.tests.PO.VacancyPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class ForPO extends BaseTest {
     HomePage homePage;
     VacancyPage vacancyPage;
+    EveningCoursesPage eveningCoursesPage;
 
     @BeforeMethod
     public void pageLoad(){
         homePage = new HomePage(driver);
         vacancyPage = new VacancyPage(driver);
+        eveningCoursesPage = new EveningCoursesPage(driver);
     }
 
 
@@ -46,31 +49,52 @@ public class ForPO extends BaseTest {
 
     @Test
     public void eveningCourses(){
+        String coursesExpected[] = {"Тестування", "Frontend development", "JS development", "Веб-дизайн", "PHP", "Java programming", "Python", "Data Science/Machine Learning", "C# /.NET development", "C++", "Game Development", "DEVOPS", "Digital Marketing", "Управління персоналом", "Управління проектами", "Mobile development", "Відеомонтаж", "Cisco", "Go development", "Кібербезпека", "Менеджмент"};
         homePage.open()
                 .openEveningCourses()
                 .openCoursesEven();
+        eveningCoursesPage.findCourse();
+        for(String course: coursesExpected){
+            boolean isContains = eveningCoursesPage.findCourse().contains(course);
+            assertTrue(isContains, String.format("Expected course '%s' to be present on page", course));
+        }
+    }
+
+
+    @Test(dataProvider = "provider")
+    public void radioButtonCheck(String backgroundStr, String courseName){
+        homePage.open()
+                .openEveningCourses();
+        eveningCoursesPage.selectCourse(backgroundStr)
+                .buyCourse();
+        WebElement form = driver.findElement(By.xpath("//form[@class = 'user-data-form']"));
+        wait.until(ExpectedConditions.visibilityOf(form));
+        WebElement radio1 = driver.findElement(By.xpath("//label[@for='location1']"));
+        wait.until(ExpectedConditions.visibilityOf(radio1));
+        boolean isSelected = radio1.isSelected();
+        assertTrue(isSelected, "Error");
+        WebElement radio2 = driver.findElement(By.xpath("//label[@for='location2']"));
+        wait.until(ExpectedConditions.visibilityOf(radio2));
+        boolean isSelected2 = radio2.isSelected();
+        assertFalse(isSelected2, "Error");
+        WebElement radio3= driver.findElement(By.xpath("//label[@for='location2']"));
+        wait.until(ExpectedConditions.visibilityOf(radio3));
+        boolean isSelected3 = radio3.isSelected();
+        assertFalse(isSelected3, "Error");
+        WebElement ckeckBox = driver.findElement(By.xpath("//label[@for='input-privacy-policy']"));
+        wait.until(ExpectedConditions.visibilityOf(ckeckBox));
+        boolean isSelected4 = ckeckBox.isSelected();
+        assertFalse(isSelected4,"Error");
     }
 
 
-
-    @Test
-    public void checkLang() {
-        String langExpected[] = {"UA", "EN", "RU"};
-
-        homePage.open();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("(//a[text() = 'UA'])[1]"))));
-
-        List<WebElement> langElements = driver.findElements(By.xpath("(//ul[@class='lang'])[1]//a"));
-        List<String> langActual = new ArrayList<>();
-
-        for (WebElement el : langElements) {
-            langActual.add(el.getText());
-        }
-
-        for(String lang: langExpected){
-            boolean isContains = langActual.contains(lang);
-            assertTrue(isContains, String.format("Expected language '%s' to be present on page", lang));
-
-        }
+    @DataProvider
+    public Object [][] provider(){
+        return new Object[][]{
+                {"background:#F5991A;", "Тестування"},
+                {"background:#F5E619;", "Frontend development"},
+                {"background:#2868A8;", "JS development"},
+        };
     }
+
 }

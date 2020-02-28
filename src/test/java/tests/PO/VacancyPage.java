@@ -15,13 +15,13 @@ public class VacancyPage extends BasePage {
         super(driver);
     }
 
-//    public VacancyPage open(){
-//        driver.get();
-//        return this;
-//    }
+    public VacancyPage open(){
+        driver.get("http://iteaua-develop.demo.gns-it.com/uk/vacancies/");
+        return this;
+    }
 
     public VacancyPage selectVacancy(String vacancy){
-        logger.trace("Select vacancy" + vacancy);
+        logger.trace("Select vacancy"+" " + vacancy);
         logger.debug("Select vacancy" + vacancy);
         logger.info("Select vacancy" + vacancy);
         logger.error("Select vacancy" + vacancy);
