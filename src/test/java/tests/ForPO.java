@@ -69,22 +69,22 @@ public class ForPO extends BaseTest {
                 .buyCourse();
         WebElement form = driver.findElement(By.xpath("//form[@class = 'user-data-form']"));
         wait.until(ExpectedConditions.visibilityOf(form));
-        WebElement radio1 = driver.findElement(By.xpath("//label[@for='location1']/span"));
-        wait.until(ExpectedConditions.elementToBeClickable(radio1));
-        //boolean isSelected = radio1.isSelected();
-        assertTrue(true, "Error");
-        WebElement radio2 = driver.findElement(By.xpath("//label[@for='location2']/span"));
-        wait.until(ExpectedConditions.elementToBeClickable(radio2));
+        WebElement radio1 = driver.findElement(By.xpath("//label[@for='location1']"));
+        wait.until(ExpectedConditions.visibilityOf(radio1));
+        boolean isSelected = radio1.isSelected();
+        assertTrue(isSelected, "Error");
+        WebElement radio2 = driver.findElement(By.xpath("//label[@for='location2']"));
+        wait.until(ExpectedConditions.visibilityOf(radio2));
         boolean isSelected2 = radio2.isSelected();
-        assertFalse(false, "Error");
-        WebElement radio3= driver.findElement(By.xpath("//label[@for='location2']/span"));
-        wait.until(ExpectedConditions.elementToBeClickable(radio3));
+        assertFalse(isSelected2, "Error");
+        WebElement radio3= driver.findElement(By.xpath("//label[@for='location2']"));
+        wait.until(ExpectedConditions.visibilityOf(radio3));
         boolean isSelected3 = radio3.isSelected();
-        assertFalse(false, "Error");
-        WebElement ckeckBox = driver.findElement(By.xpath("//label[@for='input-privacy-policy']/span"));
-        wait.until(ExpectedConditions.elementToBeClickable(ckeckBox));
+        assertFalse(isSelected3, "Error");
+        WebElement ckeckBox = driver.findElement(By.xpath("//label[@for='input-privacy-policy']"));
+        wait.until(ExpectedConditions.visibilityOf(ckeckBox));
         boolean isSelected4 = ckeckBox.isSelected();
-        assertFalse(false,"Error");
+        assertFalse(isSelected4,"Error");
     }
 
 

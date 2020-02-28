@@ -57,8 +57,8 @@ public class dataProviderTest {
         lang.click();
         WebElement logo = driver.findElement(By.xpath("//img[@alt='ITEA']"));
         wait.until(ExpectedConditions.visibilityOf(logo));
-        //boolean isDisplayed = logo.isDisplayed();
-        assertTrue(true, "Error");
+        boolean isDisplayed = logo.isDisplayed();
+        assertTrue(isDisplayed, "Error");
     }
 
     @AfterMethod
